@@ -9,27 +9,27 @@
 [![YouTube](https://img.shields.io/badge/Demo-YouTube%20Video-FF0000.svg?style=for-the-badge&logo=youtube&logoColor=white)](#video-demonstration)
 [![Paper](https://img.shields.io/badge/Research-SAM%203%20Paper-b31b1b.svg?style=for-the-badge&logo=arxiv&logoColor=white)](#research-article--references)
 
-Welcome to the **SAM 3 (Segment Anything Model 3)** project repository—a Python implementation showcasing **Promptable Concept Segmentation (PCS)** developed by Meta AI[cite: 4, 18, 21].
+Welcome to the **SAM 3 (Segment Anything Model 3)** project repository—a Python implementation showcasing **Promptable Concept Segmentation (PCS)** developed by Meta AI.
 
-Developed as part of the **Image and Video Processing (Master's / Data Science Project)** curriculum at the Higher Institute of Computer Science and Multimedia of Sfax (ISIMS), this solution implements a **hybrid pipeline** combining local GPU inference (PyTorch + Triton on Windows) and remote API querying (Hugging Face / Gradio) to bypass hardware VRAM constraints while maintaining full local rendering control[cite: 30].
+Developed as part of the **Image and Video Processing (Master's / Data Science Project)** curriculum at the Higher Institute of Computer Science and Multimedia of Sfax (ISIMS), this solution implements a **hybrid pipeline** combining local GPU inference (PyTorch + Triton on Windows) and remote API querying (Hugging Face / Gradio) to bypass hardware VRAM constraints while maintaining full local rendering control.
 
 ---
 
 ## 👨‍🎓 Team & Supervision
 
-* **Authors:** Mohamed Neifar & Mahdi Neifar[cite: 4]
-* **Supervisor:** Mr. Ali Wali[cite: 4]
-* **Model Studied:** Meta SAM 3 (*Segment Anything Model 3*)[cite: 4, 21]
+* **Authors:** Mohamed Neifar & Mahdi Neifar
+* **Supervisor:** Mr. Ali Wali
+* **Model Studied:** Meta SAM 3 (*Segment Anything Model 3*)
 
 ---
 
 ## 🎥 Video Demonstration
 
-Watch the live demonstration of our SAM 3 segmentation pipeline in action—covering concept prompting, mask generation, and interactive segmentation[cite: 26]:
+Watch the live demonstration of our SAM 3 segmentation pipeline in action—covering concept prompting, mask generation, and interactive segmentation:
 
 [![Demo SAM 3](https://img.youtube.com/vi/aGlFo6fFcEM/0.jpg)](https://youtu.be/aGlFo6fFcEM)
 
-> 🔗 **Direct Video Link:** https://youtu.be/aGlFo6fFcEM [cite: 26]
+> 🔗 **Direct Video Link:** https://youtu.be/aGlFo6fFcEM 
 ---
 
 ## 📚 Research Article & References
@@ -37,14 +37,14 @@ Watch the live demonstration of our SAM 3 segmentation pipeline in action—cove
 This implementation and our theoretical analysis are based on the official Meta AI research publication and resources:
 
 * 📄 **Official Research Paper:** *SAM 3: Segment Anything with Concepts* — Meta AI Research (`Sam 3 Article.pdf` included in `docs/`).
-* 📊 **Academic Presentation:** `Presentation SAM 3.pdf` — Detailed breakdown of PCS vs. traditional segmentation paradigms, architecture, and real-world use cases[cite: 4, 5].
+* 📊 **Academic Presentation:** `Presentation SAM 3.pdf` — Detailed breakdown of PCS vs. traditional segmentation paradigms, architecture, and real-world use cases.
 * 💻 **Official Meta Repository & Hugging Face:** [facebookresearch/sam3](https://github.com/facebookresearch/sam3) | [Hugging Face Space (`akhaliq/sam3`)](https://huggingface.co/spaces/akhaliq/sam3)
 
 ---
 
 ## 🏛️ Pipeline Architecture
 
-The system is engineered around a decoupled hybrid architecture that separates metadata and confidence score retrieval (via the remote server) from tensor computation and high-precision graphical rendering (locally)[cite: 30].
+The system is engineered around a decoupled hybrid architecture that separates metadata and confidence score retrieval (via the remote server) from tensor computation and high-precision graphical rendering (locally).
 
 ```mermaid
 graph TD
@@ -80,18 +80,18 @@ graph TD
 ```
 
 ### Internal Architecture of SAM 3
-Unlike SAM 1 and SAM 2, which required manual clicks or bounding boxes per object (*Promptable Visual Segmentation* - PVS), **SAM 3** introduces **PCS (*Promptable Concept Segmentation*)** powered by three core modules[cite: 18, 21, 22]:
-1. **Perception Encoder (PE):** A unified vision-language backbone trained on 5.4 billion image-text pairs that aligns visual features with text embeddings from the ground up[cite: 22].
-2. **Detector & Presence Head:** Based on the DETR architecture, the unique *Presence Head* globally predicts whether a requested concept exists in the image before attempting to localize boundaries, drastically reducing hallucinated masks and false positives[cite: 22, 23].
-3. **Tracker & Memory Bank:** A dedicated video propagation module that stores past object appearances in a memory bank and applies temporal disambiguation to track spatio-temporal masks (*masklets*) across video frames even under occlusions[cite: 22, 24].
+Unlike SAM 1 and SAM 2, which required manual clicks or bounding boxes per object (*Promptable Visual Segmentation* - PVS), **SAM 3** introduces **PCS (*Promptable Concept Segmentation*)** powered by three core modules:
+1. **Perception Encoder (PE):** A unified vision-language backbone trained on 5.4 billion image-text pairs that aligns visual features with text embeddings from the ground up.
+2. **Detector & Presence Head:** Based on the DETR architecture, the unique *Presence Head* globally predicts whether a requested concept exists in the image before attempting to localize boundaries, drastically reducing hallucinated masks and false positives.
+3. **Tracker & Memory Bank:** A dedicated video propagation module that stores past object appearances in a memory bank and applies temporal disambiguation to track spatio-temporal masks (*masklets*) across video frames even under occlusions.
 
 ---
 
 ## ✨ Key Features
 
 ### 🖼️ Open-Vocabulary Concept Segmentation (Zero-Shot PCS)
-* **Natural Language Prompts:** Automatically detects, segments, and tracks all instances of a concept described by a simple noun phrase (e.g., `"penguin"`, `"person"`, `"striped cat"`, `"hard hat"`) without any prior fine-tuning or fixed class vocabulary[cite: 18, 21, 23, 27].
-* **Multi-Output Extraction:** Simultaneously outputs pixel-level **binary segmentation masks**, **bounding boxes**, and **confidence scores** for every detected instance[cite: 11, 21].
+* **Natural Language Prompts:** Automatically detects, segments, and tracks all instances of a concept described by a simple noun phrase (e.g., `"penguin"`, `"person"`, `"striped cat"`, `"hard hat"`) without any prior fine-tuning or fixed class vocabulary.
+* **Multi-Output Extraction:** Simultaneously outputs pixel-level **binary segmentation masks**, **bounding boxes**, and **confidence scores** for every detected instance.
 
 ### ⚡ Windows Hardware & CUDA Optimization
 * **Triton on Windows:** Integrates `triton-windows` alongside the MSVC C++ Build Tools compiler to JIT-compile critical custom GPU kernels (such as the *Euclidean Distance Transform - EDT* used in mask refinement).
@@ -102,23 +102,23 @@ Unlike SAM 1 and SAM 2, which required manual clicks or bounding boxes per objec
 * **Interactive CLI Loop Mode:** Continuous terminal-based prompt execution allowing users to sequentially test multiple local images and concepts without reloading model weights into VRAM.
 
 ### 🌍 Real-World Use Cases
-As covered in our architectural study, SAM 3's open-vocabulary segmentation directly powers[cite: 13]:
-1. **Autonomous Vehicles:** Real-time road, lane, pedestrian, and obstacle parsing[cite: 13].
-2. **Medical Imaging:** Anatomical structure and anomaly isolation[cite: 13].
-3. **Satellite & Geospatial Analysis:** Land cover, infrastructure, and environmental monitoring[cite: 13].
-4. **Multimedia & Video Editing:** Automated rotoscoping, background removal, and object tracking[cite: 13].
-5. **Precision Agriculture & Industry:** Automated crop inspection, defect detection, and robotic grasping[cite: 13].
+As covered in our architectural study, SAM 3's open-vocabulary segmentation directly powers:
+1. **Autonomous Vehicles:** Real-time road, lane, pedestrian, and obstacle parsing.
+2. **Medical Imaging:** Anatomical structure and anomaly isolation.
+3. **Satellite & Geospatial Analysis:** Land cover, infrastructure, and environmental monitoring.
+4. **Multimedia & Video Editing:** Automated rotoscoping, background removal, and object tracking.
+5. **Precision Agriculture & Industry:** Automated crop inspection, defect detection, and robotic grasping.
 
 ---
 
 ## 📊 Segmentation Paradigms Comparison
 
-| Feature | Semantic Segmentation | Instance Segmentation | Panoptic Segmentation | **PCS (SAM 3)**[cite: 19] |
+| Feature | Semantic Segmentation | Instance Segmentation | Panoptic Segmentation | **PCS (SAM 3)** |
 | :--- | :---: | :---: | :---: | :---: |
-| **Function / Granularity** | Pixel-level class labels (merges same-class objects)[cite: 15, 19] | Delimits each distinct object instance (ignores background)[cite: 16, 19] | Combines semantic background & distinct object instances[cite: 17, 19] | **Detects, segments & tracks all instances of a concept**[cite: 19] |
-| **Vocabulary** | Fixed (predefined classes)[cite: 19] | Fixed (predefined classes)[cite: 19] | Fixed (predefined classes)[cite: 19] | **Open Vocabulary (Free text / Exemplars)**[cite: 19] |
-| **User Control** | None[cite: 19] | None[cite: 19] | None[cite: 19] | **Text prompts, points, boxes & exemplar images**[cite: 19, 23] |
-| **Video Tracking** | No[cite: 19] | No[cite: 19] | No[cite: 19] | **Yes (Memory Bank & Temporal Disambiguation)**[cite: 19, 24] |
+| **Function / Granularity** | Pixel-level class labels (merges same-class objects) | Delimits each distinct object instance (ignores background) | Combines semantic background & distinct object instances | **Detects, segments & tracks all instances of a concept** |
+| **Vocabulary** | Fixed (predefined classes) | Fixed (predefined classes) | Fixed (predefined classes) | **Open Vocabulary (Free text / Exemplars)**|
+| **User Control** | None | None | None | **Text prompts, points, boxes & exemplar images** |
+| **Video Tracking** | No | No | No | **Yes (Memory Bank & Temporal Disambiguation)** |
 
 ---
 
@@ -141,7 +141,7 @@ sam3-concept-segmentation-pipeline/
 
 ## 🚀 Getting Started
 
-Follow these steps to set up your environment, configure Windows GPU compilation, and run the project locally[cite: 30].
+Follow these steps to set up your environment, configure Windows GPU compilation, and run the project locally.
 
 ### 📋 Prerequisites
 * **Operating System:** Windows 10 or Windows 11 (64-bit) with an NVIDIA GPU (CUDA 12.6 recommended).
@@ -207,10 +207,10 @@ python main_hybrid.py
 ## ⚠️ Known Limitations & Challenges
 
 Based on our technical evaluation of Meta's SAM 3 architecture, four main limitations were identified[cite: 27]:
-1. **Specialized / Niche Domains:** Generalization drops on highly specialized concepts (e.g., complex medical terminology or specific aircraft variants) without domain-specific fine-tuning[cite: 27].
-2. **Video Computational Cost:** Video inference speed decreases linearly as the number of simultaneously tracked objects increases, requiring high-VRAM GPUs (> 6 GB) for high-resolution streams[cite: 27].
-3. **Linguistic Reasoning Complexity:** Optimized for concise noun phrases (e.g., `"striped cat"`); queries requiring multi-step spatial or logical reasoning require coupling SAM 3 with a Multimodal Large Language Model (MLLM)[cite: 27].
-4. **Concept vs. Instance Interactivity:** Refining a single specific instance without affecting other instances of the same concept requires explicitly toggling between *Concept Mode* and *Instance Mode*[cite: 27].
+1. **Specialized / Niche Domains:** Generalization drops on highly specialized concepts (e.g., complex medical terminology or specific aircraft variants) without domain-specific fine-tuning.
+2. **Video Computational Cost:** Video inference speed decreases linearly as the number of simultaneously tracked objects increases, requiring high-VRAM GPUs (> 6 GB) for high-resolution streams.
+3. **Linguistic Reasoning Complexity:** Optimized for concise noun phrases (e.g., `"striped cat"`); queries requiring multi-step spatial or logical reasoning require coupling SAM 3 with a Multimodal Large Language Model (MLLM).
+4. **Concept vs. Instance Interactivity:** Refining a single specific instance without affecting other instances of the same concept requires explicitly toggling between *Concept Mode* and *Instance Mode*.
 
 ---
 
