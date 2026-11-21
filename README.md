@@ -170,7 +170,7 @@ pip install triton-windows
 
 #### Step 3: Clone the Repository & Install Dependencies
 ```bash
-git clone [https://github.com/Mohamed-Neifar/sam3-concept-segmentation-pipeline.git](https://github.com/Mohamed-Neifar/sam3-concept-segmentation-pipeline.git)
+git clone [[https://github.com/Mohamed-Neifar/sam3-concept-segmentation-pipeline.git]
 cd sam3-concept-segmentation-pipeline
 
 # Clone official Meta SAM 3 source code if not already present
