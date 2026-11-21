@@ -29,9 +29,7 @@ Watch the live demonstration of our SAM 3 segmentation pipeline in action—cove
 
 [![Demo SAM 3](https://img.youtube.com/vi/aGlFo6fFcEM/0.jpg)](https://youtu.be/aGlFo6fFcEM)
 
-> 🔗 **Direct Video Link:** https://youtu.be/aGlFo6fFcEM [cite: 26]  
-> *(Replace `YOUR_VIDEO_ID` with your actual YouTube video ID to automatically display the clickable video thumbnail).*
-
+> 🔗 **Direct Video Link:** https://youtu.be/aGlFo6fFcEM [cite: 26]
 ---
 
 ## 📚 Research Article & References
